@@ -1,54 +1,187 @@
-.App {
-  text-align: center;
-  background-color: #282c34;
+/* App.css */
+@import url('https://fonts.com/css2?family=Outfit:wght@300;500;700&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Outfit', sans-serif;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  color: #fff;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: white;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 40px 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Header & Wallet */
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(to right, #00c6ff, #0072ff);
+  
+  -webkit-background-clip: text; 
+  -webkit-text-fill-color: transparent;
+  
+  background-clip: text; /* Стандартное свойство */
+  
 }
 
 .connect-btn {
-  padding: 15px 30px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 10px 20px;
+  border-radius: 30px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.connect-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 15px rgba(0, 198, 255, 0.5);
+}
+
+/* Game Card */
+.game-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 40px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  margin-bottom: 30px;
+}
+
+.choices-grid {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 30px 0;
+}
+
+/* Стили для контейнера выбора (изображения) */
+.choice-item {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid transparent; 
+  border-radius: 20px;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  overflow: hidden; 
+}
+
+.choice-item img {
+  width: 80px; 
+  height: 80px;
+  pointer-events: none; 
+  transition: transform 0.3s;
+}
+
+.choice-item:hover:not(.disabled) {
+  transform: translateY(-10px) scale(1.05);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #00c6ff;
+  box-shadow: 0 0 20px rgba(0, 198, 255, 0.5);
+}
+
+.choice-item.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Status Messages */
+.status-box {
+  min-height: 24px;
+  margin-top: 20px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.loader {
+  color: #00c6ff;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+
+/* History Section */
+.history-section {
+  width: 100%;
+}
+
+.history-title {
   font-size: 1.2rem;
-  background: #61dafb;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.buttons button {
-  font-size: 2rem;
-  margin: 10px;
-  padding: 20px;
-  border-radius: 15px;
-  border: none;
-  cursor: pointer;
-  background: #3e4452;
-  transition: transform 0.2s;
-}
-
-.buttons button:hover {
-  transform: scale(1.1);
-  background: #61dafb;
+  margin-bottom: 15px;
+  opacity: 0.8;
 }
 
 .history-list {
   list-style: none;
   padding: 0;
-  max-width: 400px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .history-item {
-  background: #3a3f4b;
-  margin: 5px 0;
-  padding: 10px;
-  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border-left: 4px solid transparent;
 }
 
-.Win { border-left: 5px solid #4caf50; }
-.Lose { border-left: 5px solid #f44336; }
-.Draw { border-left: 5px solid #ff9800; }
+.history-item.Win {
+  border-left-color: #00ff88;
+  background: linear-gradient(90deg, rgba(0, 255, 136, 0.1), transparent);
+}
+
+.history-item.Lose {
+  border-left-color: #ff4d4d;
+  background: linear-gradient(90deg, rgba(255, 77, 77, 0.1), transparent);
+}
+
+.history-item.Draw {
+  border-left-color: #ffaa00;
+  background: linear-gradient(90deg, rgba(255, 170, 0, 0.1), transparent);
+}
+
+.result-badge {
+  font-weight: bold;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.Win .result-badge { color: #00ff88; background: rgba(0, 255, 136, 0.1); }
+.Lose .result-badge { color: #ff4d4d; background: rgba(255, 77, 77, 0.1); }
+.Draw .result-badge { color: #ffaa00; background: rgba(255, 170, 0, 0.1); }
